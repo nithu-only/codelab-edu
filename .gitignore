@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+backend/target/
+
+# TypeScript incremental cache
+*.tsbuildinfo
+
+# Local environment files (keep *.example)
+.env
+.env.local
+.env.*.local
+
+# Runtime / scratch
+workspaces/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
