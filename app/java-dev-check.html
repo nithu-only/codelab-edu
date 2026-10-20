@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Java engine dev check</title>
+  </head>
+  <body>
+    <pre id="out">running…</pre>
+    <script type="module">
+      import { execute } from "/src/exec/index.ts";
+
+      const cases = [
+        {
+          label: "hello-stdin",
+          code: 'import java.util.Scanner;\npublic class Main {\n  public static void main(String[] args) {\n    int n = new Scanner(System.in).nextInt();\n    System.out.println("Hello " + n);\n  }\n}',
+          stdin: "42\n",
+        },
+        {
+          label: "renamed-class-rerun",
+          code: 'public class Program { public static void main(String[] a) { System.out.println("RENAMED CLASS WORKS"); } }',
+          stdin: "",
+        },
+        {
+          label: "compile-error",
+          code: 'public class Main { public static void main(String[] a) { System.out.println("x") } }',
+          stdin: "",
+        },
+        {
+          label: "runtime-error",
+          code: 'public class Main { public static void main(String[] a) { System.out.println("before"); int[] x = new int[1]; System.out.println(x[5]); } }',
+          stdin: "",
+        },
+        {
+          label: "no-main",
+          code: "public class Helper { static void go() {} }",
+          stdin: "",
+        },
+      ];
+
+      const results = [];
+      try {
+        for (const c of cases) {
+          const t0 = performance.now();
+          const r = await execute({ language: "java", code: c.code, stdin: c.stdin });
+          results.push({
+            label: c.label,
+            status: r.status,
+            stdout: r.stdout,
+            stderr: r.stderr,
+            engineUnavailable: r.engineUnavailable ?? false,
+            ms: Math.round(performance.now() - t0),
+          });
+        }
+        window.__labResult = { ok: true, cases: results };
+      } catch (err) {
+        window.__labResult = { ok: false, error: String((err && err.stack) || err) };
+      }
+      window.__labDone = true;
+      document.getElementById("out").textContent = JSON.stringify(window.__labResult, null, 2);
+    </script>
+  </body>
+</html>

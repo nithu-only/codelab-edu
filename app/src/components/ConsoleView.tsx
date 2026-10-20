@@ -55,8 +55,10 @@ export default function ConsoleView({ status, running, stdout, stderr, timeMs }:
         <>
           {"\n"}
           <span className="console-note">
-            JavaScript and SQL always run in your browser. For C / C++ / Java / Python, configure an
-            execution provider (see README → Code execution).
+            JavaScript, SQL, Python, C, C++ and Java all run in your browser (Python, C/C++ and
+            Java download their toolchains once, then cache). If an in-browser engine can't load,
+            an optional Judge0-compatible provider can run it remotely — see README → Code
+            execution.
           </span>
         </>
       )}

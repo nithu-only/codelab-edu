@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predev": "node scripts/fetch-tools-jar.mjs && node scripts/gen-java-worker.mjs",
     "build": "tsc -b && vite build",
+    "prebuild": "node scripts/fetch-tools-jar.mjs && node scripts/gen-java-worker.mjs",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "verify:java": "node scripts/java-verify.mjs"
   },
   "dependencies": {
     "@codemirror/lang-cpp": "^6.0.2",
@@ -20,6 +23,7 @@
     "@codemirror/view": "^6.28.0",
     "@lezer/highlight": "^1.2.0",
     "codemirror": "^6.0.1",
+    "pyodide": "^0.29.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.0",
@@ -31,6 +35,7 @@
     "@types/sql.js": "^1.4.9",
     "@vitejs/plugin-react": "^4.3.3",
     "jsdom": "^30.1.3",
+    "puppeteer-core": "^23.11.1",
     "typescript": "^5.5.3",
     "vite": "^5.4.8",
     "vitest": "^2.1.8"

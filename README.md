@@ -41,14 +41,16 @@ npm run dev        # http://localhost:5174
 | -------- | ------- | ------------- |
 | JavaScript | In-browser Web Worker (`input()` provides stdin) | None |
 | SQL | sql.js (SQLite WASM), fresh seeded in-memory DB per run | None |
-| C / C++ / Java / Python | Judge0-compatible API via Netlify Function proxy (`/api/execute`) | `JUDGE0_API_URL`, `JUDGE0_API_KEY` (+ optional `JUDGE0_API_HOST`) as **server-side** env vars |
+| C / C++ | In-browser wasm-clang (clang + lld + WASI sysroot), toolchain cached after first load | None (internet on first run) |
+| Python | In-browser Pyodide 0.29.5 (CPython 3.13 WASM), toolchain cached after first load | None (internet on first run) |
+| Java | In-browser CheerpJ 4.3 (WebAssembly JVM) with javac from a bundled `tools.jar`, toolchain cached after first load | None (internet on first run) |
 
-Without a Judge0 provider, compiled/interpreted languages show an honest `NOT_CONFIGURED` notice — output is never faked. Full details, local-dev proxy setup (`netlify dev`, `VITE_JUDGE0_URL`), and all environment variables: [`app/README.md`](app/README.md).
+All six languages run in the browser. Python/C/C++/Java also fall back to the Judge0 provider when their in-browser engine can't load and a provider is configured. Without any engine/provider the app shows an honest `NOT_CONFIGURED` notice — output is never faked. Full details, in-browser engine notes (including CheerpJ attribution/licensing), local-dev proxy setup (`netlify dev`, `VITE_JUDGE0_URL`), and all environment variables: [`app/README.md`](app/README.md).
 
 ### Deploy (Netlify)
 
 1. Create a site with **base directory = `app`** (build command, publish dir, Node 20, and ordered redirects are already in [`app/netlify.toml`](app/netlify.toml)).
-2. Optionally add the `JUDGE0_*` environment variables for C/C++/Java/Python execution.
+2. Optionally add the `JUDGE0_*` environment variables as a fallback for any language (no language needs them — all six run in the browser).
 3. Deploy — the site is static apart from the optional `/api/execute` function (SPA fallback cannot shadow it; redirects are ordered correctly).
 
 ---

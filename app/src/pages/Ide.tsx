@@ -154,16 +154,19 @@ export default function Ide() {
       <div className="page-head">
         <h1>Online IDE</h1>
         <p>
-          Write, run and save programs. JavaScript and SQL run locally in your browser; C, C++, Java
-          and Python run through your configured execution provider. Press <span className="kbd">Ctrl</span>+<span className="kbd">Enter</span> to run.
+          Write, run and save programs. All six languages run entirely in your browser —
+          JavaScript and SQL instantly, and Python, C, C++ and Java download their toolchains
+          once on first use, then cache them. Press <span className="kbd">Ctrl</span>+
+          <span className="kbd">Enter</span> to run, or tap ▶ Run.
         </p>
       </div>
 
       {state.status === "NOT_CONFIGURED" && (
         <div className="banner">
-          <strong>{label} execution is not configured yet.</strong> JavaScript and SQL always work
-          offline in the browser. To run {label}, add a Judge0-compatible provider — see{" "}
-          <code>app/README.md → Code execution</code>.
+          <strong>{label} can't run right now.</strong> All six languages run in the browser —
+          JavaScript and SQL instantly, and Python, C, C++ and Java with a one-time toolchain
+          download. If an in-browser engine can't load, add a Judge0-compatible provider as a
+          fallback — see <code>app/README.md → Code execution</code>.
         </div>
       )}
 
@@ -179,7 +182,6 @@ export default function Ide() {
           {LANGUAGES.map((l) => (
             <option key={l} value={l}>
               {LANGUAGE_LABELS[l]}
-              {l === "javascript" || l === "sql" ? " (runs in browser)" : ""}
             </option>
           ))}
         </select>
@@ -235,11 +237,7 @@ export default function Ide() {
             <span>Output</span>
             <div className="row">
               <StatusPill status={state.status} />
-              <span className="small">
-                {language === "javascript" || language === "sql"
-                  ? "in-browser"
-                  : "remote provider"}
-              </span>
+              <span className="small">in-browser</span>
             </div>
           </div>
           <ConsoleView

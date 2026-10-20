@@ -16,6 +16,12 @@ backend/target/
 # Runtime / scratch
 workspaces/
 
+# Large toolchain binary fetched on demand (see app/scripts/fetch-tools-jar.mjs)
+app/public/tools.jar
+
+# Generated (see app/scripts/gen-java-worker.mjs)
+app/public/javaWorker.js
+
 # Logs
 *.log
 npm-debug.log*

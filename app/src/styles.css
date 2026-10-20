@@ -7,7 +7,7 @@
   --radius: 10px;
   --radius-sm: 7px;
   --nav-h: 58px;
-  --max-w: 1160px;
+  --max-w: 1400px;
   --accent: #10b981;
   --accent-strong: #059669;
   --accent-soft: rgba(16, 185, 129, 0.14);
@@ -113,12 +113,12 @@ pre {
   width: 100%;
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 28px 20px 64px;
+  padding: 28px clamp(16px, 3.5vw, 36px) 64px;
   flex: 1;
 }
 
 .page-narrow {
-  max-width: 860px;
+  max-width: 1000px;
 }
 
 .page-head {
@@ -134,7 +134,7 @@ pre {
 .page-head p {
   margin: 0;
   color: var(--text-muted);
-  max-width: 720px;
+  max-width: none;
 }
 
 .grid {
@@ -189,7 +189,7 @@ pre {
   max-width: var(--max-w);
   height: 100%;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 clamp(16px, 3.5vw, 36px);
   display: flex;
   align-items: center;
   gap: 18px;

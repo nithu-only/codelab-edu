@@ -471,7 +471,6 @@ int main() {
           syntax: "// restate -> example -> steps -> code -> test",
           exampleCode: `#include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
 int main() {
@@ -479,9 +478,14 @@ int main() {
     cin >> n;
     vector<int> v(n);
     for (int i = 0; i < n; i++) cin >> v[i];
-    sort(v.begin(), v.end());
+    for (int i = 0; i < n; i++)
+        for (int j = i + 1; j < n; j++)
+            if (v[j] < v[i]) { int t = v[i]; v[i] = v[j]; v[j] = t; }
     long long best = 0;
-    for (int i = 1; i < n; i++) best = max(best, (long long)v[i] * v[i - 1]);
+    for (int i = 1; i < n; i++) {
+        long long p = (long long)v[i] * v[i - 1];
+        if (p > best) best = p;
+    }
     cout << best << endl;
     return 0;
 }`,
@@ -498,7 +502,6 @@ int main() {
             "Read n positions on a line (n ≤ 1000). Find the position p (must be one of the given positions) minimising the total distance travelled to all points. Print that minimum total distance.",
           starterCode: `#include <iostream>
 #include <vector>
-#include <algorithm>
 #include <cstdlib>
 using namespace std;
 

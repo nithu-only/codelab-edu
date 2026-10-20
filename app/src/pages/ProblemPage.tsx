@@ -65,7 +65,6 @@ export default function ProblemPage() {
   const solved = progress.solvedProblems.includes(problem.id);
   const allPassed = results !== null && results.length > 0 && results.every((r) => r.passed);
   const anyNotConfigured = results?.some((r) => r.skipped) ?? false;
-  const remote = !(language === "javascript" || language === "sql");
 
   return (
     <main className="page">
@@ -83,11 +82,13 @@ export default function ProblemPage() {
         <p>{problem.prompt}</p>
       </div>
 
-      {remote && anyNotConfigured && (
+      {anyNotConfigured && (
         <div className="banner">
-          <strong>This language runs through a remote execution provider, which is not configured.</strong>{" "}
-          Add a Judge0-compatible provider (see <code>app/README.md → Code execution</code>) to run
-          the sample tests. The expected outputs below are shown from the course content.
+          <strong>No execution engine is available for this language right now.</strong> All six
+          languages run in your browser (Python, C/C++ and Java download their toolchains once,
+          then cache). If an in-browser engine can't load, an optional Judge0-compatible provider
+          can run it remotely — see <code>app/README.md → Code execution</code>. The expected
+          outputs below are shown from the course content.
         </div>
       )}
       {allPassed && (
@@ -169,7 +170,7 @@ export default function ProblemPage() {
             </div>
           ))}
 
-          {!running && results === null && remote && (
+          {!running && results === null && (
             <div className="example-expected">
               Example expected output (from content):
               {"\n"}

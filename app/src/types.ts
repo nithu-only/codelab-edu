@@ -19,6 +19,11 @@ export interface ExecResult {
   stdout: string;
   stderr: string;
   timeMs?: number;
+  /**
+   * Set when an in-browser engine failed to load (CDN/network) rather than the
+   * student's code failing — lets the dispatcher fall back to a remote provider.
+   */
+  engineUnavailable?: boolean;
 }
 
 export interface TestCase {
