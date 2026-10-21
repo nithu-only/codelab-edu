@@ -30,9 +30,11 @@ npm run dev        # http://localhost:5174
 
 | Command | Purpose |
 | ------- | ------- |
-| `npm run dev` | Dev server (port 5174) |
+| `npm run dev` | Dev server (port 5174); `predev` fetches `tools.jar` and generates the Java worker |
 | `npm run build` | Type-check + production build → `app/dist/` |
-| `npm test` | Vitest suite (44 tests: content, SQL engine, comparison, storage) |
+| `npm test` | Vitest suite — 60 tests (content, SQL engine, Python, comparison, storage; C/C++ network tests skip by default) |
+| `NET_TESTS=1 npm test` | Adds the 8 wasm-clang integration tests (downloads the C/C++ toolchain once) |
+| `npm run verify:java` | Headless-Chrome end-to-end check of the Java engine (dev server must be running) |
 | `npm run preview` | Serve the production build locally |
 
 ### Code execution model
@@ -77,7 +79,9 @@ codelab/
 ├── app/                  # CodeLab Edu — Netlify-ready education app (current)
 │   ├── netlify.toml      # build + ordered /api/* and SPA redirects
 │   ├── netlify/functions/execute.mjs   # Judge0 proxy (server-side secrets)
-│   └── src/              # pages, components, curricula (data/content), exec adapters, lib
+│   ├── scripts/          # tools.jar fetch, Java worker generator, Java e2e verify
+│   ├── public/           # generated javaWorker.js + fetched tools.jar (git-ignored)
+│   └── src/              # pages, components, curricula (data/content), exec engines, lib
 ├── backend/              # Legacy Spring Boot execution service (Docker runner)
 ├── frontend/             # Legacy React + Monaco frontend
 ├── docs/                 # Legacy setup documentation
