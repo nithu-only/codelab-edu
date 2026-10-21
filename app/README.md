@@ -2,6 +2,8 @@
 
 A lightweight programming-education web app: an **Online IDE** plus a **Learn & Practice** curriculum, built as a static React site that deploys to Netlify (or any static host).
 
+**Live deployment:** https://codelab-edu.netlify.app
+
 - **Stack:** React 18 + Vite 5 + TypeScript 5.5, CodeMirror 6 (lazy-loaded), react-router-dom 7, sql.js (SQLite-in-WASM), Pyodide (CPython-in-WASM), wasm-clang (clang/lld-in-WASM), plain CSS. No backend of its own — execution is in-browser or via a Judge0-compatible provider.
 - **Languages:** C, C++, Java, Python, JavaScript, SQL.
 

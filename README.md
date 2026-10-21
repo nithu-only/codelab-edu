@@ -3,6 +3,8 @@
 An online IDE and guided learning app for six languages: **C, C++, Java, Python, JavaScript, SQL**.
 Everything runs client-side in the browser (WebAssembly) — no server required.
 
+**Live:** https://codelab-edu.netlify.app
+
 > **Looking for the legacy Docker runner?** The old Spring Boot + React/Monaco backend lives on the
 > [`docker`](../../tree/docker) branch. `main` contains only the current `app/`.
 
