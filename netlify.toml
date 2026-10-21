@@ -1,0 +1,20 @@
+# Root Netlify config: point Netlify at the app/ subdirectory.
+# Keep this in sync with app/netlify.toml (which holds the real build + redirects).
+
+[build]
+  base = "app"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
