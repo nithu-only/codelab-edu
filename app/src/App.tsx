@@ -6,6 +6,7 @@ import Ide from "./pages/Ide";
 import Learn from "./pages/Learn";
 import PathOverview from "./pages/PathOverview";
 import TopicPage from "./pages/TopicPage";
+import CTutorialPage from "./pages/CTutorialPage";
 import ProblemPage from "./pages/ProblemPage";
 import Saved from "./pages/Saved";
 import NotFound from "./pages/NotFound";
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/ide" element={<Ide />} />
         <Route path="/learn" element={<Learn />} />
         <Route path="/learn/:lang" element={<PathOverview />} />
+        <Route path="/learn/c/:topicId" element={<CTutorialPage />} />
         <Route path="/learn/:lang/:topicId" element={<TopicPage />} />
         <Route path="/problems/:problemId" element={<ProblemPage />} />
         <Route path="/saved" element={<Saved />} />
