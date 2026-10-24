@@ -51,12 +51,17 @@ export interface Lesson {
   exampleCode: string;
   exampleStdin: string;
   exampleOutput: string;
+  explanation?: string;
+  tips?: string[];
+  mistakes?: string[];
+  objectives?: string[];
 }
 
 export interface Topic {
   id: string;
   title: string;
   difficulty: "beginner" | "intermediate" | "advanced";
+  section?: string;
   lessons: Lesson[];
   problems: Problem[];
 }

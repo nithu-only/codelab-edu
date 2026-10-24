@@ -67,3 +67,42 @@ describe("learning content structure", () => {
     }
   });
 });
+
+describe("C tutorial completeness", () => {
+  const path = LEARNING_PATHS.c;
+
+  it("ships the full syllabus as grouped sections", () => {
+    expect(path.topics.length).toBeGreaterThanOrEqual(18);
+    for (const topic of path.topics) {
+      expect(topic.section, `${topic.id} section`).toBeTruthy();
+      expect(topic.lessons.length, `${topic.id} lessons`).toBeGreaterThanOrEqual(5);
+    }
+  });
+
+  it("has real content in every lesson, not placeholders", () => {
+    for (const topic of path.topics) {
+      for (const lesson of topic.lessons) {
+        expect(lesson.concept.length, `${lesson.id} concept`).toBeGreaterThan(60);
+        expect(lesson.syntax.trim().length, `${lesson.id} syntax`).toBeGreaterThan(0);
+        expect(lesson.exampleCode.trim().length, `${lesson.id} code`).toBeGreaterThan(20);
+        expect(lesson.exampleOutput.trim().length, `${lesson.id} output`).toBeGreaterThan(0);
+        expect(lesson.explanation?.trim().length ?? 0, `${lesson.id} explanation`).toBeGreaterThan(30);
+        expect(lesson.objectives?.length ?? 0, `${lesson.id} objectives`).toBeGreaterThan(0);
+        expect(lesson.tips?.length ?? 0, `${lesson.id} tips`).toBeGreaterThan(0);
+        expect(lesson.mistakes?.length ?? 0, `${lesson.id} mistakes`).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it("teaches the format-specifier rules the syllabus promises", () => {
+    const fmt = path.topics.find((t) => t.id === "c-format-specifiers");
+    expect(fmt).toBeTruthy();
+    const text = fmt!.lessons
+      .map((l) => `${l.title} ${l.concept} ${l.syntax} ${l.explanation ?? ""}`)
+      .join(" ");
+    expect(text).toContain("%lf");
+    expect(text).toContain("%zu");
+    expect(text).toContain("%.2f");
+    expect(text.toLowerCase()).toContain("scanf");
+  });
+});

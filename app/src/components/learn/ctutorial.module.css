@@ -1,0 +1,143 @@
+.shell {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  min-height: calc(100vh - 58px);
+  background: var(--bg);
+}
+
+.sidebar {
+  border-right: 1px solid var(--border);
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 58px;
+  height: calc(100vh - 58px);
+}
+
+.sidebarHead {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  gap: 8px;
+}
+
+.courseTitle {
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+}
+
+.search {
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text);
+}
+
+.nav {
+  overflow: auto;
+  padding: 6px 0 20px;
+}
+
+.section {
+  margin-bottom: 4px;
+}
+
+.sectionBtn {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  padding: 8px 14px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.topicGroup {
+  padding: 2px 0;
+}
+
+.topicGroupTitle {
+  padding: 6px 16px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.lessonLink {
+  display: block;
+  padding: 6px 22px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  border-left: 2px solid transparent;
+}
+
+.lessonLink:hover {
+  background: var(--bg-alt);
+  text-decoration: none;
+}
+
+.active {
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-left-color: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.main {
+  max-width: 980px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 18px clamp(16px, 4vw, 40px) 80px;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.breadcrumbs a {
+  color: var(--accent-text);
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 36px;
+  gap: 12px;
+}
+
+.pagerBtn {
+  border: 1px solid var(--border-strong);
+  background: var(--panel-2);
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.pagerBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 980px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: static;
+    height: auto;
+    max-height: 60vh;
+  }
+}
